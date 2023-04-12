@@ -1,3 +1,41 @@
+2023-04-07 Riccardo Mottola <rm@gnu.org>
+
+	* Framework/Pantomime/CWLocalCacheManager.m:
+	Set mailFilename only if no filename is present, this reverts partially
+	to rev 673 and original LM code.
+
+2022-11-06 Riccardo Mottola <rm@gnu.org>
+
+	* Framework/Pantomime/CWPOP3Store.m
+	* Framework/Pantomime/NSScanner+Extensions.m
+	* Framework/Pantomime/CWDNSManager.m
+	* Framework/Pantomime/CWLocalFolder+mbox.m
+	* Framework/Pantomime/NSData+Extensions.m
+	Fix some types and casts
+
+2022-11-01 Riccardo Mottola <rm@gnu.org>
+
+	* Framework/Pantomime/CWFolder.h
+	* Framework/Pantomime/CWFolder.m
+	* Framework/Pantomime/CWIMAPCacheManager.m
+	* Framework/Pantomime/CWIMAPFolder.m
+	* Framework/Pantomime/CWIMAPStore.m
+	* Framework/Pantomime/CWLocalCacheManager.m
+	* Framework/Pantomime/CWLocalFolder+maildir.m
+	* Framework/Pantomime/CWLocalFolder+mbox.m
+	* Framework/Pantomime/CWLocalFolder.m
+	* Framework/Pantomime/CWPOP3Folder.m
+	* Framework/Pantomime/CWPOP3Store.m
+	* Framework/Pantomime/CWVirtualFolder.m
+	Make allMessages of CWFolder private, make count explicit as
+	countVisible.
+
+2022-11-01 Riccardo Mottola <rm@gnu.org>
+
+	* Framework/Pantomime/CWDNSManager.m:
+	CWDNSRequest: make servers and name protected, add accessors and
+	fix assignment memory leak.
+
 2022-09-28 Riccardo Mottola <rm@gnu.org>
 
 	* Framework/Pantomime/NSString+Extensions.m

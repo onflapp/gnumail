@@ -2,6 +2,7 @@
  **  AutoCompletingTextField.h
  **
  **  Copyright (c) 2003 Ken Ferry
+ **  Copyright (C) 2023 Riccardo Mottola
  **
  **  Author: Ken Ferry <kenferry@mac.com>
  **
@@ -24,6 +25,16 @@
 
 #import <AppKit/AppKit.h>
 
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSUInteger
+#define NSUInteger unsigned int
+#endif
+#ifndef NSInteger
+#define NSInteger int
+#endif
+#endif
+
+
 @interface NSObject ( CompletionsDataSource )
 
 // should return nil if there is no valid completion
@@ -39,7 +50,7 @@
   NSRange _prefixRange;
   NSArray *_cachedCompletions;
   float _completionDelay;
-  int _maximumDropDownRows;
+  NSUInteger _maximumDropDownRows;
   BOOL _commaDelimited;
   BOOL _dropDownIsDown;
 
@@ -62,8 +73,8 @@
 - (void)setCommaDelimited:(BOOL)commaDelimited;
 - (float)completionDelay;
 - (void)setCompletionDelay:(float)completionDelay;
-- (int)maximumDropDownRows;
-- (void)setMaximumDropDownRows:(int)maxRows;
+- (NSUInteger)maximumDropDownRows;
+- (void)setMaximumDropDownRows:(NSUInteger)maxRows;
 
 @end
 

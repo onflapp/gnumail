@@ -51,7 +51,6 @@
 		85D5FBB61A7854B800C29F74 /* flagged-flag.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 823AA9C70A160CA8004CC486 /* flagged-flag.tiff */; };
 		85D5FBB71A7854B800C29F74 /* forward_32.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 823AA9C80A160CA8004CC486 /* forward_32.tiff */; };
 		85D5FBB81A7854B800C29F74 /* forward_48.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 823AA9C90A160CA8004CC486 /* forward_48.tiff */; };
-		85D5FBB91A7854B800C29F74 /* GNUMail_128.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 823AA9CA0A160CA8004CC486 /* GNUMail_128.tiff */; };
 		85D5FBBA1A7854B800C29F74 /* GNUMail_big.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 823AA9CB0A160CA8004CC486 /* GNUMail_big.tiff */; };
 		85D5FBBB1A7854B800C29F74 /* GNUMail_Full.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 823AA9CC0A160CA8004CC486 /* GNUMail_Full.tiff */; };
 		85D5FBBC1A7854B800C29F74 /* GNUMail.icns in Resources */ = {isa = PBXBuildFile; fileRef = 823AA9CD0A160CA8004CC486 /* GNUMail.icns */; };
@@ -749,7 +748,6 @@
 		823AA9C70A160CA8004CC486 /* flagged-flag.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "flagged-flag.tiff"; path = "Resources/Icons/flagged-flag.tiff"; sourceTree = "<group>"; };
 		823AA9C80A160CA8004CC486 /* forward_32.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = forward_32.tiff; path = Resources/Icons/forward_32.tiff; sourceTree = "<group>"; };
 		823AA9C90A160CA8004CC486 /* forward_48.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = forward_48.tiff; path = Resources/Icons/forward_48.tiff; sourceTree = "<group>"; };
-		823AA9CA0A160CA8004CC486 /* GNUMail_128.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = GNUMail_128.tiff; path = Resources/Icons/GNUMail_128.tiff; sourceTree = "<group>"; };
 		823AA9CB0A160CA8004CC486 /* GNUMail_big.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = GNUMail_big.tiff; path = Resources/Icons/GNUMail_big.tiff; sourceTree = "<group>"; };
 		823AA9CC0A160CA8004CC486 /* GNUMail_Full.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = GNUMail_Full.tiff; path = Resources/Icons/GNUMail_Full.tiff; sourceTree = "<group>"; };
 		823AA9CD0A160CA8004CC486 /* GNUMail.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = GNUMail.icns; path = Resources/Icons/GNUMail.icns; sourceTree = "<group>"; };
@@ -1975,7 +1973,6 @@
 				823AA9C70A160CA8004CC486 /* flagged-flag.tiff */,
 				823AA9C80A160CA8004CC486 /* forward_32.tiff */,
 				823AA9C90A160CA8004CC486 /* forward_48.tiff */,
-				823AA9CA0A160CA8004CC486 /* GNUMail_128.tiff */,
 				823AA9CB0A160CA8004CC486 /* GNUMail_big.tiff */,
 				823AA9CC0A160CA8004CC486 /* GNUMail_Full.tiff */,
 				823AA9CD0A160CA8004CC486 /* GNUMail.icns */,
@@ -2648,7 +2645,6 @@
 				85D5FBB61A7854B800C29F74 /* flagged-flag.tiff in Resources */,
 				85D5FBB71A7854B800C29F74 /* forward_32.tiff in Resources */,
 				85D5FBB81A7854B800C29F74 /* forward_48.tiff in Resources */,
-				85D5FBB91A7854B800C29F74 /* GNUMail_128.tiff in Resources */,
 				85D5FBBA1A7854B800C29F74 /* GNUMail_big.tiff in Resources */,
 				85D5FBBB1A7854B800C29F74 /* GNUMail_Full.tiff in Resources */,
 				85D5FBBC1A7854B800C29F74 /* GNUMail.icns in Resources */,

@@ -2,7 +2,7 @@
 **  EditWindowController.m
 **
 **  Copyright (c) 2001-2007 Ludovic Marcotte
-**  Copyright (C) 2014-2019 Riccardo Mottola
+**  Copyright (C) 2014-2023 Riccardo Mottola
 **
 **  Author: Ludovic Marcotte <ludovic@Sophos.ca>
 **          Riccardo Mottola <rm@gnu.org>
@@ -1349,7 +1349,7 @@
       CWPart *aPart;      
       
       NSAutoreleasePool *pool;
-      NSString *aString;
+      NSString *tmpString;
 
       // We create our local autorelease pool
       pool = [[NSAutoreleasePool alloc] init];
@@ -1367,14 +1367,14 @@
       RELEASE(aPart);
 
       // We get our text store string representation
-      aString = [textStorage string];
+      tmpString = [textStorage string];
       
       // We finally add all our attachments
       for (i = 0; i < [textStorage length]; i++)
 	{
 	  NSTextAttachment *aTextAttachment;
 	  
-	  if ( [aString characterAtIndex: i] != NSAttachmentCharacter )
+	  if ( [tmpString characterAtIndex: i] != NSAttachmentCharacter )
 	    {
 	      continue;
 	    }

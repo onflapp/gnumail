@@ -2,7 +2,7 @@
 **  CWLocalCacheManager.m
 **
 **  Copyright (c) 2001-2007 Ludovic Marcotte
-**  Copyright (C) 2013-2020 Riccardo Mottola
+**  Copyright (C) 2013-2023 Riccardo Mottola
 **
 **  Author: Ludovic Marcotte <ludovic@Sophos.ca>
 **          Riccardo Mottola <rm@gnu.org>
@@ -310,11 +310,11 @@ static unsigned short version = 1;
       aMessage = [[CWLocalMessage alloc] initWithCacheRecord:cr];
       [aMessage setFolder: _folder];
  
-      if ([aMessage filename] != nil)
+      if (nil == [aMessage filename])
 	[aMessage setMailFilename: mailFilename];
   
       [aMessage setMessageNumber: i+1];
-      [((CWFolder *)_folder)->allMessages addObject: aMessage];
+      [[((CWFolder *)_folder) messages] addObject: aMessage];
       RELEASE(aMessage);
       
       free(r);
@@ -369,7 +369,7 @@ static unsigned short version = 1;
     }
   
   _modification_date = (unsigned int)[[attributes objectForKey: NSFileModificationDate] timeIntervalSince1970];
-  _count = [_folder->allMessages count];
+  _count = [[_folder messages] count];
 
   if (lseek(_fd, 0L, SEEK_SET) < 0)
     {
@@ -398,7 +398,7 @@ static unsigned short version = 1;
         }
       //NSLog(@"len = %d", len);
 
-      if ((NSNull *)(aMessage = [_folder->allMessages objectAtIndex: i]) != [NSNull null])
+      if ((NSNull *)(aMessage = [[_folder messages] objectAtIndex: i]) != [NSNull null])
 	{
 	  flags = ((CWFlags *)[aMessage flags])->flags;
 	  write_uint32(_fd, flags);
@@ -527,8 +527,8 @@ static unsigned short version = 1;
   // case we have to rewrite the filename for a maildir cache
   // and the filename length is greater than the previous one.
   //
-  buf = (char *)malloc(cache_size+[_folder count]*10);
-  _count = [_folder->allMessages count];
+  buf = (char *)malloc(cache_size+[[_folder messages] count]*10);
+  _count = [[_folder messages] count];
 
   for (i = 0; i < _count; i++)
     {
@@ -537,7 +537,7 @@ static unsigned short version = 1;
           NSLog(@"CWLocalCacheManager expunge: record length read error (%lu/%lu)", (unsigned long)i, (unsigned long)_count);
           break;
         }
-      aMessage = [_folder->allMessages objectAtIndex: i];
+      aMessage = [[_folder messages] objectAtIndex: i];
       flags = ((CWFlags *)[aMessage flags])->flags;
       delta = 0;
 

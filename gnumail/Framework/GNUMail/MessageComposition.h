@@ -27,6 +27,16 @@
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
 
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSUInteger
+#define NSUInteger unsigned int
+#endif
+#ifndef NSInteger
+#define NSInteger int
+#endif
+#endif
+
+
 @class CWInternetAddress;
 @class ToRecipient;
 @class CcRecipient;
@@ -94,25 +104,25 @@
 @interface MessageComposition (KeyValueCoding)
 
 - (void) insertInRecipients: (CWInternetAddress *) object;
-- (void) insertInRecipients: (CWInternetAddress *) object  atIndex: (unsigned) index;
-- (void) removeFromRecipientsAtIndex: (unsigned) index;
-- (void) replaceInRecipients: (CWInternetAddress *) object  atIndex: (unsigned) index;
-- (id) valueInRecipientsAtIndex: (unsigned) index;
+- (void) insertInRecipients: (CWInternetAddress *) object  atIndex: (NSUInteger) theIndex;
+- (void) removeFromRecipientsAtIndex: (NSUInteger) theIndex;
+- (void) replaceInRecipients: (CWInternetAddress *) object  atIndex: (NSUInteger) theIndex;
+- (id) valueInRecipientsAtIndex: (NSUInteger) index;
 - (void) insertInToRecipients: (ToRecipient *) object;
-- (void) insertInToRecipients: (ToRecipient *) object  atIndex: (unsigned) index;
-- (void) removeFromToRecipientsAtIndex: (unsigned) index;
-- (void) replaceInToRecipients: (ToRecipient *) object  atIndex: (unsigned) index;
-- (id) valueInToRecipientsAtIndex: (unsigned) index;
+- (void) insertInToRecipients: (ToRecipient *) object  atIndex: (NSUInteger) theIndex;
+- (void) removeFromToRecipientsAtIndex: (NSUInteger) theIndex;
+- (void) replaceInToRecipients: (ToRecipient *) object  atIndex: (NSUInteger) theIndex;
+- (id) valueInToRecipientsAtIndex: (NSUInteger) theIndex;
 - (void) insertInCcRecipients: (CcRecipient *) object;
-- (void) insertInCcRecipients: (CcRecipient *) object  atIndex: (unsigned) index;
-- (void) removeFromCcRecipientsAtIndex: (unsigned) index;
-- (void) replaceInCcRecipients: (CcRecipient *) object  atIndex: (unsigned) index;
-- (id) valueInCcRecipientsAtIndex: (unsigned) index;
+- (void) insertInCcRecipients: (CcRecipient *) object  atIndex: (NSUInteger) theIndex;
+- (void) removeFromCcRecipientsAtIndex: (NSUInteger) theIndex;
+- (void) replaceInCcRecipients: (CcRecipient *) object  atIndex: (NSUInteger) theIndex;
+- (id) valueInCcRecipientsAtIndex: (NSUInteger) theIndex;
 - (void) insertInBccRecipients: (BccRecipient *) object;
-- (void) insertInBccRecipients: (BccRecipient *) object  atIndex: (unsigned) index;
-- (void) removeFromBccRecipientsAtIndex: (unsigned) index;
-- (void) replaceInBccRecipients: (BccRecipient *) object  atIndex: (unsigned) index;
-- (id) valueInBccRecipientsAtIndex: (unsigned) index;
+- (void) insertInBccRecipients: (BccRecipient *) object  atIndex: (NSUInteger) theIndex;
+- (void) removeFromBccRecipientsAtIndex: (NSUInteger) theIndex;
+- (void) replaceInBccRecipients: (BccRecipient *) object  atIndex: (NSUInteger) theIndex;
+- (id) valueInBccRecipientsAtIndex: (NSUInteger) theIndex;
 
 @end
 

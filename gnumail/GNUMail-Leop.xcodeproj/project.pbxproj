@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		855ABD80252DF59C00484223 /* Info-GNUMail.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85D5FC161A7854B800C29F74 /* Info-GNUMail.plist */; };
 		85D5FB8B1A7854B800C29F74 /* GNUMail.scriptSuite in Resources */ = {isa = PBXBuildFile; fileRef = DDAE831603E303C700A8A065 /* GNUMail.scriptSuite */; };
 		85D5FB911A7854B800C29F74 /* add_bcc_32.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 823AA9A00A160CA8004CC486 /* add_bcc_32.tiff */; };
 		85D5FB921A7854B800C29F74 /* add_bcc_48.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 823AA9A10A160CA8004CC486 /* add_bcc_48.tiff */; };
@@ -1320,18 +1319,18 @@
 			children = (
 				43974D7704117BEE00442E8B /* Classes */,
 				43974D7604117BE600442E8B /* Headers */,
-				43974D7404117BD300442E8B /* Ressources */,
+				43974D7404117BD300442E8B /* Resources */,
 			);
 			name = Colors;
 			sourceTree = "<group>";
 		};
-		43974D7404117BD300442E8B /* Ressources */ = {
+		43974D7404117BD300442E8B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				43974D7804117CA400442E8B /* colors.tiff */,
 				43974D7504117BDB00442E8B /* Nibs */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		43974D7504117BDB00442E8B /* Nibs */ = {
@@ -1363,18 +1362,18 @@
 			children = (
 				43974D8D04117E7900442E8B /* Classes */,
 				43974D8C04117E6A00442E8B /* Headers */,
-				43974D8A04117E5C00442E8B /* Ressources */,
+				43974D8A04117E5C00442E8B /* Resources */,
 			);
 			name = Advanced;
 			sourceTree = "<group>";
 		};
-		43974D8A04117E5C00442E8B /* Ressources */ = {
+		43974D8A04117E5C00442E8B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				43974D8E04117E9B00442E8B /* advanced.tiff */,
 				43974D8B04117E6400442E8B /* Nibs */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		43974D8B04117E6400442E8B /* Nibs */ = {
@@ -1486,7 +1485,7 @@
 			children = (
 				F517DF9F02293D6201A80103 /* Classes */,
 				F517DFA002293D6201A80103 /* Headers */,
-				F517DFA102293D6201A80103 /* Ressources */,
+				F517DFA102293D6201A80103 /* Resources */,
 			);
 			name = Viewing;
 			sourceTree = "<group>";
@@ -1509,7 +1508,7 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
-		F517DFA102293D6201A80103 /* Ressources */ = {
+		F517DFA102293D6201A80103 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				823AE3C10BB6F79B0054A9F4 /* widescreen_96x96.tiff */,
@@ -1519,7 +1518,7 @@
 				F5E20AC50229937F01A80103 /* viewing.tiff */,
 				F517DFA202293D6201A80103 /* Nibs */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F517DFA202293D6201A80103 /* Nibs */ = {
@@ -1536,7 +1535,7 @@
 			children = (
 				F517DFA402293D6201A80103 /* Classes */,
 				F517DFA502293D6201A80103 /* Headers */,
-				F517DFA602293D6201A80103 /* Ressources */,
+				F517DFA602293D6201A80103 /* Resources */,
 			);
 			name = Sending;
 			sourceTree = "<group>";
@@ -1557,13 +1556,13 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
-		F517DFA602293D6201A80103 /* Ressources */ = {
+		F517DFA602293D6201A80103 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				F5E20AC60229937F01A80103 /* MailIcon_send.tiff */,
 				F517DFA702293D6201A80103 /* Nibs */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F517DFA702293D6201A80103 /* Nibs */ = {
@@ -1579,7 +1578,7 @@
 			children = (
 				F517E0140229468C01A80103 /* Classes */,
 				F517E0160229468C01A80103 /* Headers */,
-				F517E0190229468C01A80103 /* Ressources */,
+				F517E0190229468C01A80103 /* Resources */,
 			);
 			name = Compose;
 			sourceTree = "<group>";
@@ -1600,13 +1599,13 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
-		F517E0190229468C01A80103 /* Ressources */ = {
+		F517E0190229468C01A80103 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				F5E20AC70229937F01A80103 /* MailIcon_create.tiff */,
 				F517E01A0229468C01A80103 /* Nibs */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F517E01A0229468C01A80103 /* Nibs */ = {
@@ -1622,7 +1621,7 @@
 			children = (
 				F517E030022947E001A80103 /* Classes */,
 				F517E032022947E001A80103 /* Headers */,
-				F517E035022947E001A80103 /* Ressources */,
+				F517E035022947E001A80103 /* Resources */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -1643,13 +1642,13 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
-		F517E035022947E001A80103 /* Ressources */ = {
+		F517E035022947E001A80103 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				F517E036022947E001A80103 /* fonts.tiff */,
 				F517E037022947E001A80103 /* Nibs */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F517E037022947E001A80103 /* Nibs */ = {
@@ -1665,7 +1664,7 @@
 			children = (
 				F517E03D0229494701A80103 /* Classes */,
 				F517E03E0229494701A80103 /* Headers */,
-				F517E03F0229494701A80103 /* Ressources */,
+				F517E03F0229494701A80103 /* Resources */,
 			);
 			name = Filtering;
 			sourceTree = "<group>";
@@ -1696,13 +1695,13 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
-		F517E03F0229494701A80103 /* Ressources */ = {
+		F517E03F0229494701A80103 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				F517E07D0229495701A80103 /* Filtering.tiff */,
 				F517E0400229494701A80103 /* Nibs */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F517E0400229494701A80103 /* Nibs */ = {
@@ -1721,7 +1720,7 @@
 			children = (
 				F517E04A0229494701A80103 /* Classes */,
 				F517E04F0229494701A80103 /* Headers */,
-				F517E0570229494701A80103 /* Ressources */,
+				F517E0570229494701A80103 /* Resources */,
 			);
 			name = Mime;
 			sourceTree = "<group>";
@@ -1745,13 +1744,13 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
-		F517E0570229494701A80103 /* Ressources */ = {
+		F517E0570229494701A80103 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				F517E0580229494701A80103 /* mime.tiff */,
 				F517E0590229494701A80103 /* Nibs */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F517E0590229494701A80103 /* Nibs */ = {
@@ -1768,7 +1767,7 @@
 			children = (
 				F517E0C402297BE401A80103 /* Classes */,
 				F517E0C702297BE401A80103 /* Headers */,
-				F517E0CE02297BE401A80103 /* Ressources */,
+				F517E0CE02297BE401A80103 /* Resources */,
 			);
 			name = Receiving;
 			sourceTree = "<group>";
@@ -1789,13 +1788,13 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
-		F517E0CE02297BE401A80103 /* Ressources */ = {
+		F517E0CE02297BE401A80103 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				F517E0CF02297BE401A80103 /* MailIcon_retrieve.tiff */,
 				F517E0D002297BE401A80103 /* Nibs */,
 			);
-			name = Ressources;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		F517E0D002297BE401A80103 /* Nibs */ = {
@@ -2703,7 +2702,6 @@
 				85D5FBF71A7854B800C29F74 /* drafts_32.tiff in Resources */,
 				85D5FBF81A7854B800C29F74 /* drafts_48.tiff in Resources */,
 				85D5FBF91A7854B800C29F74 /* Welcome in Resources */,
-				855ABD80252DF59C00484223 /* Info-GNUMail.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3617,7 +3615,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
 				GCC_MODEL_TUNING = "";
-				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					DEBUG,
 					MACOSX,

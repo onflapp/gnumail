@@ -1,7 +1,41 @@
+2023-03-30 Riccardo Mottola <rm@gnu.org>
+
+	* Framework/GNUMail/AutoCompletingTextField.m:
+        Solve handling completion of "Lastname, FirstName" and preferring it
+        over the possibility of autocompleting an address before other
+
+2023-03-21 Riccardo Mottola <rm@gnu.org>
+
+	* Framework/GNUMail/AutoCompletingTextField.m:
+	Add action: to the table to intercept mouse click and hide
+	the dropdown on mouse selection
+
+2023-01-17 Riccardo Mottola <rm@gnu.org>
+
+	* Framework/GNUMail/EditWindowController.m
+	* Framework/GNUMail/FindWindowController.m
+	* Framework/GNUMail/GNUMail.h
+	* Framework/GNUMail/GNUMail.m
+	* Framework/GNUMail/MailboxManagerController.m:
+	Fix shadowed variables.
+
+2022-11-01 Riccardo Mottola <rm@gnu.org>
+
+	* Framework/GNUMail/MailWindowController.m
+	* Framework/GNUMail/MailboxManagerController.m
+	* Framework/GNUMail/TaskManager.m:
+	Adapt to CWFolder private allMessages and countVisible.
+
+2022-10-26 Riccardo Mottola <rm@gnu.org>
+
+	* Framework/GNUMail/Task.h
+	* Framework/GNUMail/TaskManager.m:
+	Make ivars which have an accessor proteted instead of public.
+
 2022-10-13 Riccardo Mottola <rm@gnu.org>
 
 	* Framework/GNUMail/TaskManager.h
-	* Framework/GNUMail/TaskManager.m
+	* Framework/GNUMail/TaskManager.m:
 	Keep track of store objects, so they can pe properly disposed of.
 
 2021-09-30 Riccardo Mottola <rm@gnu.org>

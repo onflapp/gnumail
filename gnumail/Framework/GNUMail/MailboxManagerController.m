@@ -236,17 +236,17 @@ static MailboxManagerController *singleInstance = nil;
 // Datasource methods for the outline view
 //
 - (id) outlineView: (NSOutlineView *) outlineView
-	     child: (NSInteger) index
+	     child: (NSInteger) childIndex
 	    ofItem: (id) item
 {
   if (!item || item == _allFolders)
     {
-      return [_allFolders objectAtIndex: index];
+      return [_allFolders objectAtIndex: childIndex];
     }
 
   if ([item isKindOfClass: [FolderNode class]])
     {
-      return [(FolderNode *)item childAtIndex: index];
+      return [(FolderNode *)item childAtIndex: childIndex];
     }
  
   return nil;
@@ -643,16 +643,16 @@ static MailboxManagerController *singleInstance = nil;
 - (NSDragOperation) outlineView: (NSOutlineView*) theOutlineView
 		   validateDrop: (id <NSDraggingInfo>) info
 		   proposedItem: (id) item
-	     proposedChildIndex: (NSInteger) index
+	     proposedChildIndex: (NSInteger) childIndex
 {
   if (![item respondsToSelector: @selector(childCount)] ||
-      index < 0 || index >= [(FolderNode*)item childCount])
+      childIndex < 0 || childIndex >= [(FolderNode*)item childCount])
     {
       return NSDragOperationNone;
     }
   
   // Let's get the right item..
-  item = [item childAtIndex: index];
+  item = [item childAtIndex: childIndex];
   
   if ([info draggingSourceOperationMask] & NSDragOperationGeneric)
     {
@@ -679,7 +679,7 @@ static MailboxManagerController *singleInstance = nil;
 - (BOOL) outlineView: (NSOutlineView*) outlineView
 	  acceptDrop: (id <NSDraggingInfo>) info
 		item: (id) item
-	  childIndex: (NSInteger) index
+	  childIndex: (NSInteger) childIndex
 {
   CWFolder *aSourceFolder, *aDestinationFolder;
   CWStore *aSourceStore, *aDestinationStore;
@@ -692,7 +692,7 @@ static MailboxManagerController *singleInstance = nil;
   NSMutableArray *allMessages;
   NSUInteger i, count;
   
-  if (!item || index != NSOutlineViewDropOnItemIndex)
+  if (!item || childIndex != NSOutlineViewDropOnItemIndex)
     {
       NSBeep();
       return NO;
@@ -781,7 +781,7 @@ static MailboxManagerController *singleInstance = nil;
   for (i = 0; i < count; i++)
     {
       [allMessages addObject:
-		[aSourceFolder->allMessages objectAtIndex:
+                     [[aSourceFolder messages] objectAtIndex:
                                 (NSUInteger)[[(NSDictionary *)[propertyList objectAtIndex: i]
 				objectForKey: MessageNumber] intValue]-1]];
     }
@@ -1711,7 +1711,7 @@ static MailboxManagerController *singleInstance = nil;
 	}
     }
    
-  if ([[aMailWindowController folder] count] > 0 && [aMailWindowController selectedMessage])
+  if ([[aMailWindowController folder] countVisible] > 0 && [aMailWindowController selectedMessage])
     {
       aMessage = [aMailWindowController selectedMessage];
     }
@@ -3035,7 +3035,7 @@ static MailboxManagerController *singleInstance = nil;
   // We set the cache manager and we prefetch our messages
   [aFolder setCacheManager: anIMAPCacheManager];
 
-  [[aFolder cacheManager] readAllMessages];
+  [(CWIMAPCacheManager *)[aFolder cacheManager] readAllMessages];
   
   // We set the folder
   [aMailWindowController setFolder: aFolder];

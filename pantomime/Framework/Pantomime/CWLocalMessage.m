@@ -210,7 +210,7 @@ static int currentLocalMessageVersion = 1;
 
   if (fd < 0)
     {
-      NSLog(@"Unable to get the file descriptor");
+      NSLog(@"[CWLocalMessage rawSource] Unable to get the file descriptor for %@", _mailFilename);
       return nil;
     }
   

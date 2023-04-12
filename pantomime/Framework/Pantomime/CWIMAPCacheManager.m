@@ -228,7 +228,7 @@ static unsigned short version = 1;
       aMessage = [[CWIMAPMessage alloc] initWithCacheRecord:cr];
       [aMessage setMessageNumber: (unsigned int)i+1];
 
-      [((CWFolder *)_folder)->allMessages addObject: aMessage];
+      [((CWFolder *)_folder)appendMessage: aMessage];
       NSMapInsert(_table, (void *)[aMessage UID], aMessage);
       //[self addObject: aMessage]; // MOVE TO CWFIMAPOLDER
       //[((CWFolder *)_folder)->allMessages replaceObjectAtIndex: i  withObject: aMessage];
@@ -293,7 +293,7 @@ static unsigned short version = 1;
   unsigned int len, flags;
   NSUInteger i;
 
-  _count = [_folder->allMessages count];
+  _count = [[_folder messages] count];
   
   //NSLog(@"CWIMAPCacheManager: -synchronize with folder count = %d", _count);
 
@@ -312,7 +312,7 @@ static unsigned short version = 1;
   for (i = 0; i < _count; i++)
     {
       read_uint32(_fd, &len);
-      flags = ((CWFlags *)[[_folder->allMessages objectAtIndex: i] flags])->flags;
+      flags = ((CWFlags *)[[[_folder messages] objectAtIndex: i] flags])->flags;
       write_uint32(_fd, flags);
       lseek(_fd, (len-8), SEEK_CUR);
     }
@@ -449,7 +449,7 @@ static unsigned short version = 1;
     }
 
   // We write our cache version, count, modification date our new size
-  _count = [_folder->allMessages count];
+  _count = [[_folder messages] count];
   size = total_length+10;
 
   write_uint16(_fd, version);

@@ -7,7 +7,7 @@
 	<key>ApplicationName</key>
 	<string>GNUMail</string>
 	<key>ApplicationRelease</key>
-	<string>1.3.0</string>
+	<string>1.4.0</string>
 	<key>ApplicationURL</key>
 	<string>http://gnustep-nonfsf.nongnu.org/gnumail</string>
 	<key>Authors</key>
@@ -16,13 +16,13 @@
 		<string>Ludovic Marcotte &lt;ludovic@Sophos.ca&gt; and contributors</string>
 	</array>
 	<key>Copyright</key>
-	<string>Copyright (C) 1998 ... 2018 Ludovic Marcotte and contributors.</string>
+	<string>Copyright (C) 1998 ... 2023 Ludovic Marcotte and contributors.</string>
 	<key>CopyrightDescription</key>
 	<string>Released under the GNU General Public License 2.0</string>
 	<key>CFBundleIdentifier</key>
 	<string>org.gnustep.GNUMail</string>
 	<key>FullVersionID</key>
-	<string>1.3.0</string>
+	<string>1.4.0</string>
 	<key>NSIcon</key>
 	<string>GNUMail.tiff</string>
 	<key>NSServices</key>

@@ -2,7 +2,7 @@
 **  CWPOP3Store.m
 **
 **  Copyright (c) 2001-2006 Ludovic Marcotte
-**  Copyright (C) 2017-2020 Riccardo Mottola
+**  Copyright (C) 2017-2022 Riccardo Mottola
 **
 **  Author: Ludovic Marcotte <ludovic@Sophos.ca>
 **          Riccardo Mottola <rm@gnu.org>
@@ -303,7 +303,7 @@ static NSData *CRLF;
 
 //
 // No other folder is allowed in POP3 other than the Inbox.
-// Also, this folder can only holds messages.
+// Also, this folder can only hold messages.
 //
 - (PantomimeFolderType) folderTypeForFolderName: (NSString *) theName
 {
@@ -663,7 +663,7 @@ static NSData *CRLF;
     {
       sscanf([[_responsesFromServer objectAtIndex: i] cString], "%lu %lu", (unsigned long*)&idx, &size);
       
-      aMessage = [_folder->allMessages objectAtIndex: (idx-1)];
+      aMessage = [[_folder messages] objectAtIndex: (idx-1)];
       [aMessage setSize: size];
       [aMessage setMessageNumber: i];
     }
@@ -809,7 +809,7 @@ static NSData *CRLF;
 	{
 	  aMessage = [[CWPOP3Message alloc] init];
 	  [aMessage setFolder: _folder];
-	  [_folder->allMessages addObject: aMessage];
+	  [[_folder messages] addObject: aMessage];
 	  RELEASE(aMessage);
 	}
 
@@ -860,8 +860,8 @@ static NSData *CRLF;
     {
       NSMutableData *aMutableData;
       CWPOP3Message *aMessage;
-
-      int count, i, idx, num;
+      NSUInteger i, count;
+      int idx, num;
 
       // We get the idx of the message we are parsing...
       sscanf([((CWPOP3QueueObject *)[_queue lastObject])->arguments cString], "TOP %d %d", &idx, &num);
@@ -901,7 +901,7 @@ static NSData *CRLF;
     {
        memset(buf, 0, 71);
        sscanf([[_responsesFromServer objectAtIndex: i] cString],"%lu %s", (unsigned long*)&idx, buf);
-       [[_folder->allMessages objectAtIndex: (idx-1)] setUID: [NSString stringWithCString: buf]];
+       [[[_folder messages] objectAtIndex: (idx-1)] setUID: [NSString stringWithCString: buf]];
     }
 
   POST_NOTIFICATION(PantomimeFolderPrefetchCompleted, self, [NSDictionary dictionaryWithObject: _folder  forKey: @"Folder"]);

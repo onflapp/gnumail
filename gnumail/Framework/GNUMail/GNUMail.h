@@ -2,7 +2,7 @@
 **  GNUMail.h
 **
 **  Copyright (c) 2001-2007 Ludovic Marcotte
-**  Copyright (C) 2018 Riccardo Mottola
+**  Copyright (C) 2018-2023 Riccardo Mottola
 **
 **  Authors: Ludovic Marcotte <ludovic@Sophos.ca>
 **           Riccardo Mottola <rm@gnu.org>
@@ -25,6 +25,15 @@
 #define _GNUMail_H_GNUMail
 
 #import <AppKit/AppKit.h>
+
+#if defined(__APPLE__) && (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_4)
+#ifndef NSUInteger
+#define NSUInteger unsigned int
+#endif
+#ifndef NSInteger
+#define NSInteger int
+#endif
+#endif
 
 @class AddressBookController;
 @class CWMessage;
@@ -214,10 +223,10 @@
 - (void)setMessageCompositions: (NSMutableArray*)messageCompositions;
 - (void) addInMessageCompositions: (MessageComposition *)object;
 - (void) insertInMessageCompositions: (MessageComposition *) object;
-- (void) insertInMessageCompositions: (MessageComposition *) object atIndex: (unsigned) index;
-- (void) replaceInMessageCompositions: (MessageComposition *) object atIndex: (unsigned) index;
-- (void) removeFromMessageCompositionsAtIndex: (unsigned) index;
-- (id) valueInMessageCompositionsAtIndex: (unsigned) index;
+- (void) insertInMessageCompositions: (MessageComposition *) object atIndex: (NSUInteger) anIndex;
+- (void) replaceInMessageCompositions: (MessageComposition *) object atIndex: (NSUInteger) anIndex;
+- (void) removeFromMessageCompositionsAtIndex: (NSUInteger) anIndex;
+- (id) valueInMessageCompositionsAtIndex: (NSUInteger) anIndex;
 
 @end
 #endif

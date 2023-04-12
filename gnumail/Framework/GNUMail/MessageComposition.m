@@ -385,10 +385,10 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 @implementation MessageComposition (KeyValueCoding)
 
-- (id) valueInRecipientsAtIndex: (unsigned) index
+- (id) valueInRecipientsAtIndex: (NSUInteger) theIndex
 {
-  // NSLog(@"MessageComposition: valueInRecipientsAtIndex %d", index);
-  return ([[self recipients] objectAtIndex: index]);
+  // NSLog(@"MessageComposition: valueInRecipientsAtIndex %d", theIndex);
+  return ([[self recipients] objectAtIndex: theIndex]);
 }
 
 
@@ -396,10 +396,10 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 - (void) replaceInRecipients: (CWInternetAddress *) object
-		     atIndex: (unsigned) index
+		     atIndex: (NSUInteger) theIndex
 {
-  [self removeFromRecipientsAtIndex:index];
-  [self insertInRecipients:object atIndex:index];
+  [self removeFromRecipientsAtIndex:theIndex];
+  [self insertInRecipients:object atIndex:theIndex];
 }
 
 
@@ -422,10 +422,10 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 - (void) insertInRecipients: (CWInternetAddress *) object 
-		    atIndex: (unsigned) index
+		    atIndex: (NSUInteger) theIndex
 {
-  // NSLog(@"MessageComposition: insertInRecipients %@ atIndex %d", [object description], index);
-  [_recipients insertObject:object atIndex:index];
+  // NSLog(@"MessageComposition: insertInRecipients %@ atIndex %d", [object description], theIndex);
+  [_recipients insertObject:object atIndex:theIndex];
   [object setContainer: self];
 }
 
@@ -433,19 +433,19 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 //
-- (void) removeFromRecipientsAtIndex: (unsigned) index
+- (void) removeFromRecipientsAtIndex: (NSUInteger) theIndex
 {
-  // NSLog(@"MessageComposition: removeFromRecipientsAtIndex %d", index);
-  [_recipients removeObjectAtIndex:index];
+  // NSLog(@"MessageComposition: removeFromRecipientsAtIndex %d", theIndex);
+  [_recipients removeObjectAtIndex:theIndex];
 }
 
 
 //
 //
 //
-- (id) valueInCcRecipientsAtIndex: (unsigned) index
+- (id) valueInCcRecipientsAtIndex: (NSUInteger) theIndex
 {
-  return ([[self ccRecipients] objectAtIndex: index]);
+  return ([[self ccRecipients] objectAtIndex: theIndex]);
 }
 
 
@@ -453,11 +453,11 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 - (void) replaceInCcRecipients: (CcRecipient *) object
-		       atIndex: (unsigned) index
+		       atIndex: (NSUInteger) theIndex
 {
   NSArray *ccRcpts = [self ccRecipients];
   NSArray *recipients = [self recipients];
-  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo: [ccRcpts objectAtIndex:index]];
+  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo: [ccRcpts objectAtIndex:theIndex]];
   
   if (newIndex != NSNotFound)
     {
@@ -485,18 +485,18 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 - (void) insertInCcRecipients: (CcRecipient *) object 
-		      atIndex: (unsigned) index
+		      atIndex: (NSUInteger) theIndex
 {
   NSArray *ccRcpts = [self ccRecipients];
   
-  if (index == [ccRcpts count])
+  if (theIndex == [ccRcpts count])
     {
-      [self insertInRecipients:object atIndex: index];
+      [self insertInRecipients:object atIndex: theIndex];
     } 
   else 
     {
       NSArray *recipients = [self recipients];
-      NSUInteger newIndex = [recipients indexOfObjectIdenticalTo: [ccRcpts objectAtIndex: index]];
+      NSUInteger newIndex = [recipients indexOfObjectIdenticalTo: [ccRcpts objectAtIndex: theIndex]];
       if (newIndex != NSNotFound)
 	{
 	  [self insertInRecipients:object atIndex: newIndex];
@@ -513,11 +513,11 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 //
-- (void) removeFromCcRecipientsAtIndex: (unsigned) index
+- (void) removeFromCcRecipientsAtIndex: (NSUInteger) theIndex
 {
   NSArray *ccRcpts = [self ccRecipients];
   NSArray *recipients = [self recipients];
-  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo: [ccRcpts objectAtIndex: index]];
+  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo: [ccRcpts objectAtIndex: theIndex]];
   
   if (newIndex != NSNotFound)
     {
@@ -534,9 +534,9 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 //
-- (id) valueInBccRecipientsAtIndex: (unsigned) index
+- (id) valueInBccRecipientsAtIndex: (NSUInteger) theIndex
 {
-  return ([[self bccRecipients] objectAtIndex: index]);
+  return ([[self bccRecipients] objectAtIndex: theIndex]);
 }
 
 
@@ -544,11 +544,11 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 - (void) replaceInBccRecipients: (BccRecipient *) object
-			atIndex: (unsigned) index
+			atIndex: (NSUInteger) theIndex
 {
   NSArray *bccRcpts = [self bccRecipients];
   NSArray *recipients = [self recipients];
-  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo: [bccRcpts objectAtIndex:index]];
+  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo: [bccRcpts objectAtIndex:theIndex]];
   
   if (newIndex != NSNotFound)
     {
@@ -576,18 +576,18 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 - (void) insertInBccRecipients: (BccRecipient *) object 
-		       atIndex: (unsigned) index
+		       atIndex: (NSUInteger) theIndex
 {
   // implement your method here:
   NSArray *bccRcpts = [self bccRecipients];
-  if (index == [bccRcpts count])
+  if (theIndex == [bccRcpts count])
     {
-      [self insertInRecipients:object atIndex: index];
+      [self insertInRecipients:object atIndex: theIndex];
     } 
   else 
     {
       NSArray *recipients = [self recipients];
-      NSUInteger newIndex = [recipients indexOfObjectIdenticalTo: [bccRcpts objectAtIndex: index]];
+      NSUInteger newIndex = [recipients indexOfObjectIdenticalTo: [bccRcpts objectAtIndex: theIndex]];
       if (newIndex != NSNotFound)
 	{
 	  [self insertInRecipients: object  atIndex: newIndex];
@@ -604,11 +604,11 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 //
-- (void) removeFromBccRecipientsAtIndex: (unsigned) index
+- (void) removeFromBccRecipientsAtIndex: (NSUInteger) theIndex
 {
   NSArray *bccRcpts = [self bccRecipients];
   NSArray *recipients = [self recipients];
-  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo:[bccRcpts objectAtIndex:index]];
+  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo:[bccRcpts objectAtIndex:theIndex]];
   
   if (newIndex != NSNotFound)
     {
@@ -625,9 +625,9 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 //
-- (id) valueInToRecipientsAtIndex: (unsigned) index
+- (id) valueInToRecipientsAtIndex: (NSUInteger) theIndex
 {
-  return ([[self toRecipients] objectAtIndex: index]);
+  return ([[self toRecipients] objectAtIndex: theIndex]);
 }
 
 
@@ -635,12 +635,12 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 - (void) replaceInToRecipients: (ToRecipient *) object
-		       atIndex: (unsigned) index
+		       atIndex: (NSUInteger) theIndex
 {
   // NSLog(@"MessageComposition: replaceInToRecipients 0x%x at index %d", object, index);
   NSArray *toRcpts = [self toRecipients];
   NSArray *recipients = [self recipients];
-  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo:[toRcpts objectAtIndex:index]];
+  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo:[toRcpts objectAtIndex:theIndex]];
   
   if (newIndex != NSNotFound)
     {
@@ -668,19 +668,19 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 - (void) insertInToRecipients: (ToRecipient *) object
-		      atIndex: (unsigned) index
+		      atIndex: (NSUInteger) theIndex
 {
   // NSLog(@"MessageComposition: insertInToRecipients 0x%x at index %d", object, index);
   
   NSArray *toRcpts = [self toRecipients];
-  if (index == [toRcpts count])
+  if (theIndex == [toRcpts count])
     {
-      [self insertInRecipients:object atIndex: index];
+      [self insertInRecipients:object atIndex: theIndex];
     } 
   else 
     {
       NSArray *recipients = [self recipients];
-      NSUInteger newIndex = [recipients indexOfObjectIdenticalTo:[toRcpts objectAtIndex:index]];
+      NSUInteger newIndex = [recipients indexOfObjectIdenticalTo:[toRcpts objectAtIndex:theIndex]];
       if (newIndex != NSNotFound)
 	{
 	  [self insertInRecipients:object atIndex:newIndex];
@@ -697,11 +697,11 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 //
 //
 //
-- (void)removeFromToRecipientsAtIndex: (unsigned) index
+- (void)removeFromToRecipientsAtIndex: (NSUInteger) theIndex
 {
   NSArray *toRcpts = [self toRecipients];
   NSArray *recipients = [self recipients];
-  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo:[toRcpts objectAtIndex:index]];
+  NSUInteger newIndex = [recipients indexOfObjectIdenticalTo:[toRcpts objectAtIndex:theIndex]];
   
   if (newIndex != NSNotFound)
     {
@@ -797,15 +797,15 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 
 - (NSScriptObjectSpecifier *) objectSpecifier
 {
-  NSUInteger index = 0;
+  NSUInteger tmpIndex = 0;
   id classDescription = nil;
 
   NSScriptObjectSpecifier *containerRef;
   
   NSArray *messageCompositions = [[NSApp delegate] messageCompositions];
-  index = [messageCompositions indexOfObjectIdenticalTo:self];
+  tmpIndex = [messageCompositions indexOfObjectIdenticalTo:self];
   
-  if (index != NSNotFound)
+  if (tmpIndex != NSNotFound)
     {
       containerRef     = [NSApp objectSpecifier];
       classDescription = [NSClassDescription classDescriptionForClass:[NSApp class]];
@@ -814,7 +814,7 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 		initWithContainerClassDescription: classDescription
 		containerSpecifier: containerRef
 		key: @"messageCompositions"
-		index: index] autorelease];
+		index: tmpIndex] autorelease];
     } 
   else 
     {
@@ -866,15 +866,15 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 
 - (NSScriptObjectSpecifier *) objectSpecifier
 {
-  NSUInteger index = 0;
+  NSUInteger rcpIndex = 0;
   id classDescription = nil;
   
   NSScriptObjectSpecifier *containerRef = nil;
   
   NSArray *recipients = [[self container] recipients];
-  index = [recipients indexOfObjectIdenticalTo:self];
+  rcpIndex = [recipients indexOfObjectIdenticalTo:self];
   
-  if (index != NSNotFound)
+  if (rcpIndex != NSNotFound)
     {
       containerRef     = [[self container] objectSpecifier];
       classDescription = [containerRef keyClassDescription];
@@ -883,7 +883,7 @@ NSString *NSOperationNotSupportedForKeyException = @"NSOperationNotSupportedForK
 		initWithContainerClassDescription: classDescription
 		containerSpecifier: containerRef
 		key: @"recipients"
-		index: index] autorelease];
+		index: rcpIndex] autorelease];
     } 
   else 
     {

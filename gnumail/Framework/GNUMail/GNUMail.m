@@ -2,7 +2,7 @@
 **  GNUMail.m
 **
 **  Copyright (c) 2001-2007 Ludovic Marcotte
-**  Copyright (C) 2014-2019 Riccardo Mottola
+**  Copyright (C) 2014-2023 Riccardo Mottola
 **
 **  Authors: Ludovic Marcotte <ludovic@Sophos.ca>
 **           Riccardo Mottola <rm@gnu.org>
@@ -1385,7 +1385,7 @@ static BOOL doneInit = NO;
     {
       NSEnumerator *theEnumerator;
       CWContainer *aContainer;
-      NSUInteger index;
+      NSUInteger msgIndex;
 
       //
       // Find the root container
@@ -1410,22 +1410,22 @@ static BOOL doneInit = NO;
       // We now get all children of the root container. We need them
       // in order to select all messages
       //
-      index = [[aController allMessages] indexOfObject: aContainer->message];
+      msgIndex = [[aController allMessages] indexOfObject: aContainer->message];
       
-      if (index != NSNotFound)
+      if (msgIndex != NSNotFound)
 	{
-	  [[aController dataView] selectRow: index  byExtendingSelection: NO];
+	  [[aController dataView] selectRow: msgIndex  byExtendingSelection: NO];
 	}
 
       theEnumerator = [aContainer childrenEnumerator];
 
       while ((aContainer = [theEnumerator nextObject]))
 	{
-	  index = [[aController allMessages] indexOfObject: aContainer->message];
+	  msgIndex = [[aController allMessages] indexOfObject: aContainer->message];
 	  
-	  if (index != NSNotFound)
+	  if (msgIndex != NSNotFound)
 	    {
-	      [[aController dataView] selectRow: index  byExtendingSelection: YES];
+	      [[aController dataView] selectRow: msgIndex  byExtendingSelection: YES];
 	    }
 	}
     }
@@ -3316,25 +3316,25 @@ static BOOL doneInit = NO;
   [self insertInMessageCompositions: object atIndex: [_messageCompositions count]];
 }
 
-- (void) insertInMessageCompositions: (MessageComposition *) object atIndex: (unsigned) index
+- (void) insertInMessageCompositions: (MessageComposition *) object atIndex: (NSUInteger) anIndex
 {
-  [_messageCompositions insertObject: object atIndex: index];
+  [_messageCompositions insertObject: object atIndex: anIndex];
   
 }
 
-- (void) replaceInMessageCompositions: (MessageComposition *) object atIndex: (unsigned) index
+- (void) replaceInMessageCompositions: (MessageComposition *) object atIndex: (NSUInteger) anIndex
 {
-  [_messageCompositions replaceObjectAtIndex: index withObject: object];
+  [_messageCompositions replaceObjectAtIndex: anIndex withObject: object];
 }
 
-- (void) removeFromMessageCompositionsAtIndex: (unsigned) index
+- (void) removeFromMessageCompositionsAtIndex: (NSUInteger) anIndex
 {
-  [_messageCompositions removeObjectAtIndex: index];
+  [_messageCompositions removeObjectAtIndex: anIndex];
 }
 
-- (id) valueInMessageCompositionsAtIndex: (unsigned) index
+- (id) valueInMessageCompositionsAtIndex: (NSUInteger) anIndex
 {
-  return ([_messageCompositions objectAtIndex: index]);
+  return ([_messageCompositions objectAtIndex: anIndex]);
 }
 
 @end
@@ -3569,7 +3569,7 @@ static BOOL doneInit = NO;
   NSString *aString;
   Filter *aFilter;
   NSRange aRange;
-  int index;
+  NSInteger filterIndex;
 
   aWindowController = [[GNUMail lastMailWindowOnTop] delegate];
   theMessage = [aWindowController selectedMessage];
@@ -3679,10 +3679,10 @@ static BOOL doneInit = NO;
   [[FilterManager singleInstance] addFilter: aFilter];
   
   aFilteringModule = [NSBundle instanceForBundleWithName: @"Filtering"];
-  index = [[[FilterManager singleInstance] filters] count]-1;
+  filterIndex = [[[FilterManager singleInstance] filters] count]-1;
   
   if ([[aFilteringModule performSelector: @selector(editFilter:)
-			 withObject: [NSNumber numberWithInt: index]] intValue] == NSRunAbortedResponse)
+			 withObject: [NSNumber numberWithInt: filterIndex]] intValue] == NSRunAbortedResponse)
     {
       [[FilterManager singleInstance] removeFilter: aFilter];
       [aFilteringModule performSelector: @selector(updateView)];

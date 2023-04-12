@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>Pantomime</string>
 	<key>CFBundleGetInfoString</key>
-	<string>1.3.0</string>
+	<string>1.4.0</string>
 	<key>CFBundleIconFile</key>
 	<string></string>
 	<key>CFBundleIdentifier</key>
@@ -19,11 +19,11 @@
 	<key>CFBundlePackageType</key>
 	<string>FMWK</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.3.0</string>
+	<string>1.4.0</string>
 	<key>CFBundleSignature</key>
 	<string>PMIM</string>
 	<key>CFBundleVersion</key>
-	<string>1.3.0</string>
+	<string>1.4.0</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
 </dict>

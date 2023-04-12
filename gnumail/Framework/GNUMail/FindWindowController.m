@@ -2,7 +2,7 @@
 **  FindWindowController.m
 **
 **  Copyright (c) 2001-2006 Ludovic Marcotte
-**  Copyright (C) 2014-2017 Riccardo Mottola
+**  Copyright (C) 2014-2023 Riccardo Mottola
 **
 **  Author: Ludovic Marcotte <ludovic@Sophos.ca>
 **          Riccardo Mottola <rm@gnu.org>
@@ -373,7 +373,7 @@ static FindWindowController *singleInstance = nil;
 {
   NSArray *allMessages;
 
-  NSUInteger i, index, count;
+  NSUInteger i, msgIndex, count;
   id tableView;
  
   tableView = [theMailWindowController dataView];
@@ -383,12 +383,12 @@ static FindWindowController *singleInstance = nil;
   
   for (i = 0; i < count; i++)
     {
-      index = [allMessages indexOfObject: [theResults objectAtIndex: i]];
+      msgIndex = [allMessages indexOfObject: [theResults objectAtIndex: i]];
       
-      if ( index != NSNotFound )
+      if ( msgIndex != NSNotFound )
 	{
-	  [_indexes addObject: [NSNumber numberWithInt: index]];
-	  [tableView selectRow: index  byExtendingSelection: YES];
+	  [_indexes addObject: [NSNumber numberWithInt: msgIndex]];
+	  [tableView selectRow: msgIndex  byExtendingSelection: YES];
 	}
     }
 }

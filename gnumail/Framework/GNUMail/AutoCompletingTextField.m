@@ -2,9 +2,10 @@
 **  AutoCompletingTextField.m
 **
 **  Copyright (c) 2003 Ken Ferry
-**  Copyright (C) 2014-2015 GNUstep Team
+**  Copyright (C) 2014-2023 Riccardo Mottola
 **
 **  Author: Ken Ferry <kenferry@mac.com>
+**          Riccardo Mottola
 **
 **  This program is free software; you can redistribute it and/or modify
 **  it under the terms of the GNU General Public License as published by
@@ -108,6 +109,8 @@ static NSTableView *_sharedDropDownTableView = nil;
 {
   [super textDidBeginEditing:aNotification];
   [_sharedDropDownTableView setDelegate:self];
+  [_sharedDropDownTableView setTarget:self];
+  [_sharedDropDownTableView setAction:@selector(action:)];
   [_sharedDropDownTableView setDataSource:self];
   [self setDropDownIsDown:NO];
 }
@@ -116,6 +119,8 @@ static NSTableView *_sharedDropDownTableView = nil;
 {
   [super textDidEndEditing:aNotification];
   [_sharedDropDownTableView setDelegate:nil];
+  [_sharedDropDownTableView setTarget:nil];
+  [_sharedDropDownTableView setAction:NULL];
   [_sharedDropDownTableView setDataSource:nil];
   [_sharedDropDownTableView reloadData];
   [self setDropDownIsDown:NO];
@@ -196,12 +201,12 @@ static NSTableView *_sharedDropDownTableView = nil;
   if (shouldShowDropDown && shouldComplete)
     {
       NSString *component;
-      int selectedRow;
+      NSUInteger selectedRow;
 
       component = [[self stringValue] substringWithRange:_componentRange];
       selectedRow = [_cachedCompletions indexOfObject:component];
       [_sharedDropDownTableView reloadData];
-      if (selectedRow == -1 || selectedRow >= [_sharedDropDownTableView numberOfRows])
+      if (selectedRow == NSNotFound || selectedRow >= [_sharedDropDownTableView numberOfRows])
         {
 	  [_sharedDropDownTableView deselectAll: nil];
         }
@@ -224,8 +229,8 @@ static NSTableView *_sharedDropDownTableView = nil;
 {
   if (flag)
     {
-      NSInteger numTableRows, numVisibleTableRows;
-      NSUInteger selectedRow;
+      NSUInteger numTableRows, numVisibleTableRows;
+      NSInteger selectedRow;
       float visibleTableHeight;
       NSSize dropDownSize;
       NSPoint dropDownTopLeft;
@@ -257,11 +262,7 @@ static NSTableView *_sharedDropDownTableView = nil;
 
       [_sharedDropDown setFrame:NSMakeRect(dropDownTopLeft.x,
 					   
-#ifdef MACOSX
 					   dropDownTopLeft.y - dropDownSize.height,
-#else
-					   dropDownTopLeft.y - dropDownSize.height - [self frame].size.height,
-#endif
 					   dropDownSize.width,
 					   dropDownSize.height)
 		       display: YES];
@@ -301,9 +302,10 @@ static NSTableView *_sharedDropDownTableView = nil;
 - (NSRange)_commaDelimitedCurrentComponentRange
 {
   NSRange currentComponentRange;
-  NSUInteger componentEndInd, componentStartInd, insertionPoint;
+  NSUInteger componentEndInd, componentStartInd, insertionPoint, atPoint;
   NSString *insertionPtOnward, *toInsertionPt;
 
+  NSCharacterSet *atCharSet    = [NSCharacterSet characterSetWithCharactersInString:@"@"];
   NSCharacterSet *commaCharSet    = [NSCharacterSet characterSetWithCharactersInString:@","];
   NSCharacterSet *nonWhiteCharSet = [[NSCharacterSet whitespaceCharacterSet] invertedSet];
 
@@ -314,9 +316,22 @@ static NSTableView *_sharedDropDownTableView = nil;
   toInsertionPt     = [[self stringValue] substringToIndex:insertionPoint];
 
   // first we find the end of the component
-  // first approximation: the next comma after the insertion point
+  // first approximation: the next comma after the insertion point, but after the @
+  // John Doe <john@doe.com>, xx
+  // Doe, John <john@doe.com>, xx
+  // however this case is not handled
+  // xx, John Doe <john@doe.com>
+  atPoint = [insertionPtOnward rangeOfCharacterFromSet:atCharSet].location;
   componentEndInd = [insertionPtOnward rangeOfCharacterFromSet:commaCharSet].location;
-
+  if (atPoint != NSNotFound && componentEndInd != NSNotFound && componentEndInd < atPoint)
+    {
+      NSString  *atPtOnward;
+      atPtOnward = [insertionPtOnward substringFromIndex:atPoint];
+      componentEndInd = [atPtOnward rangeOfCharacterFromSet:commaCharSet].location; 
+      if (componentEndInd != NSNotFound)
+        componentEndInd += atPoint;
+    }
+  
   // if we didn't find a comma then the end of the string is the (approximate) end of the component
   if (componentEndInd == NSNotFound)
     componentEndInd = [insertionPtOnward length];
@@ -419,6 +434,16 @@ static NSTableView *_sharedDropDownTableView = nil;
     }
 }
 
+//
+//
+// delgate
+- (void) action: (id) sender
+{
+  // simulate end editing
+  [[self window] makeFirstResponder:self];
+}
+
+
 
 //
 //
@@ -429,10 +454,9 @@ static NSTableView *_sharedDropDownTableView = nil;
   NSString *newComponent;
   NSRange selectedRange;
   NSInteger selectedRow;
-  
-  selectedRow = [_sharedDropDownTableView selectedRow];
-  
-  if (selectedRow < 0 || selectedRow >= [_cachedCompletions count])
+
+  selectedRow = [_sharedDropDownTableView selectedRow];  
+  if (selectedRow < 0 || selectedRow >= (NSInteger)[_cachedCompletions count])
     {
       return;
     }
@@ -450,7 +474,7 @@ static NSTableView *_sharedDropDownTableView = nil;
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
-  if (rowIndex >= 0 && rowIndex < [_cachedCompletions count])
+  if (rowIndex >= 0 && rowIndex < (NSInteger)[_cachedCompletions count])
     {
       return [_cachedCompletions objectAtIndex: rowIndex];
     }
@@ -533,12 +557,12 @@ static NSTableView *_sharedDropDownTableView = nil;
   _completionDelay = completionDelay;
 }
 
-- (int)maximumDropDownRows
+- (NSUInteger)maximumDropDownRows
 {
   return _maximumDropDownRows;
 }
 
-- (void)setMaximumDropDownRows:(int)maxRows
+- (void)setMaximumDropDownRows:(NSUInteger)maxRows
 {
   _maximumDropDownRows = maxRows;
 }

@@ -403,7 +403,7 @@
 - (IBAction) deleteMessage: (id) sender
 {
   // If we have no element (or no selection), we return!
-  if ([_folder count] == 0 || [dataView numberOfSelectedRows] == 0)
+  if ([_folder countVisible] == 0 || [dataView numberOfSelectedRows] == 0)
     {
       NSBeep();
       return;
@@ -1418,7 +1418,7 @@
     }
 
   RELEASE(_allMessages);
-  _allMessages = RETAIN([[_folder allMessages] sortedArrayUsingSelector: sortingSel]);
+  _allMessages = RETAIN([[_folder visibleMessages] sortedArrayUsingSelector: sortingSel]);
 
   //
   // We now select all the messages that were previously selected
@@ -1603,7 +1603,7 @@
       //
       [aDictionary setObject: [NSArchiver archivedDataWithRootObject: [aMessage flags]]  forKey: MessageFlags];
       [aDictionary setObject: [NSData dataWithData: [aMessage rawSource]]  forKey: MessageData];   
-      [aDictionary setObject: [NSNumber numberWithInt: [_folder->allMessages indexOfObject: aMessage]+1]  forKey: MessageNumber];
+      [aDictionary setObject: [NSNumber numberWithInt: [[_folder messages] indexOfObject: aMessage]+1]  forKey: MessageNumber];
                   
       [propertyList addObject: aDictionary];
       RELEASE(aDictionary);
@@ -1681,7 +1681,7 @@
 
   for (i = 0; i < count; i++)
     {
-      [allMessages addObject: [aSourceFolder->allMessages objectAtIndex:
+      [allMessages addObject: [[aSourceFolder messages] objectAtIndex:
 					      [[(NSDictionary *)[propertyList objectAtIndex: i]
 								objectForKey: MessageNumber] intValue]-1]];
     }
@@ -2579,7 +2579,7 @@
 //
 - (void) updateDataView
 {
-  if ([_folder count] > 0) 
+  if ([_folder countVisible] > 0) 
     {
       // We reload the data our of dataView (since it now has some)
       [self tableViewShouldReloadData];
@@ -2662,10 +2662,10 @@
     }
   
   totalSize = unreadCount = unreadSize = deletedCount = deletedSize = 0;
-  count = [_folder count];
+  count = [_folder countVisible];
   for (i = 0; i < count; i++)
     {
-      aMessage = [[_folder allMessages] objectAtIndex: i];
+      aMessage = [[_folder visibleMessages] objectAtIndex: i];
       theFlags = [aMessage flags];
       aSize = [aMessage size];
       totalSize += aSize;

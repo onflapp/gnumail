@@ -406,7 +406,7 @@ NSUInteger number_of_unread_messages()
 	NSDockTile *dt;
 	  
 	dt = [NSApp dockTile];
-	[dt setBadgeLabel:[NSString stringWithFormat:@"%d", (unsigned long)v]];
+	[dt setBadgeLabel:[NSString stringWithFormat:@"%u", (unsigned int)v]];
       }
 #endif
 }

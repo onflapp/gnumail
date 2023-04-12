@@ -1,0 +1,7 @@
+obj
+.svn
+derived_src
+*.bundle
+*.service
+*.framework
+*.prefs

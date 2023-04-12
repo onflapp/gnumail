@@ -2,6 +2,7 @@
 **  Task.h
 **
 **  Copyright (c) 2002-2007 Ludovic Marcotte
+**  Copyright (C) 2022      Riccardo Mottola
 **
 **  Author: Ludovic Marcotte <ludovic@Sophos.ca>
 **
@@ -54,30 +55,22 @@
 
 @interface Task : NSObject <NSCoding,NSCopying>
 {
-  @public
+  @private
+    NSMutableArray *_controllers;
+    NSString *_subtitle;
+
+  @protected
     id message;      // The Message, if it exists (used when sending a mail).
                      // Could be as raw source (for bounce, for example) or an instance of Message
 
-    id service;
   
     id unmodifiedMessage; // The original message - useful when we reply to a message.
 
     id key;          // Account name.
     id sendingKey;   // The account name used to send the mail - we only use the SMTP or the 
                      // mailer informations from this account.
-
-    int op;          // One of the SEND_{SENDMAIL,SMTP} or RECEIVE_{IMAP,POP3} value.
-    int sub_op;      // A sub-operation, generally an IMAP command.
-    
-    BOOL immediate;  // If YES, we run this task immediately when it has been
-                     // added to our task's pool.
     
     NSDate *date;    // The date at which we will retry to do the op for this task.
-
-    int origin;      // "Where" the task has been created. This could be by the user,
-                     // the timer or when the application was started.
-
-    BOOL is_running;    // YES if the task is running, NO otherwise.
 
     id owner;        // The object that owns this task. It could be a MailWindowController
                      // instance, for example.
@@ -85,6 +78,22 @@
     NSMutableArray *filteredMessagesFolders; // The names of the folders when messages where
                                              // transferred since matching filters were found 
                                              // during the reception of those messages.
+
+  @public
+    id service;
+
+    int op;          // One of the SEND_{SENDMAIL,SMTP} or RECEIVE_{IMAP,POP3} value.
+    int sub_op;      // A sub-operation, generally an IMAP command.
+    
+    BOOL immediate;  // If YES, we run this task immediately when it has been
+                     // added to our task's pool.
+
+
+    int origin;      // "Where" the task has been created. This could be by the user,
+                     // the timer or when the application was started.
+
+    BOOL is_running;    // YES if the task is running, NO otherwise.
+
     int filtered_count;                      // The number of messages that have been filtered.
 
     int received_count;                      // The number of messages we have received while
@@ -94,10 +103,6 @@
     float total_size;
     float current_size;
     int total_count;                         // The number of messages or mailboxes to receive
-
-    @private
-      NSMutableArray *_controllers;
-      NSString *_subtitle;
 }
 
 //

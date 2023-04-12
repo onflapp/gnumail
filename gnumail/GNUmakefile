@@ -53,7 +53,7 @@ SUBPROJECTS = \
 	Bundles/PGP \
 	Bundles/Emoticon \
 
-VERSION = 1.3.0
+VERSION = 1.4.0
 PACKAGE_NAME = GNUMail
 APP_NAME = GNUMail
 GNUMail_OBJC_FILES = GNUMail_main.m 
